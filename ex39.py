@@ -36,8 +36,8 @@ print "Florida has: ", cities[states['Florida']]
 
 #print every state abbreviation
 print '-' * 10
-for state, abbrev in states.items():
-	print "%s is abbreviated as %s" % (state, abbrev)
+for stat, abbre in states.items():
+	print "%s is abbreviated as %s" % (stat, abbre)
 
 # print every city in state
 print '-' * 10
