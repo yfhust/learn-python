@@ -11,7 +11,7 @@ PHRASES = {
 	"class ###(object):\n\tdef __init__(self, ***)":
 	 "class ### has-a __init__ that takes self and *** parameters.",
 	"class ###(object):\n\tdef ***(self, @@@)":
-	 "clas ### has-a function named *** that takes self and @@@ parameters.",
+	 "class ### has-a function named *** that takes self and @@@ parameters.",
 	"*** = ###()":
 	 "Set *** to an instance of class ###.",
 	"***.***(@@@)":
@@ -28,7 +28,7 @@ if len(sys.argv) == 2 and sys.argv[1] == "english":
 # load up the words from the website
 for word in urlopen(WORD_URL).readline():
 	WORDS.append(word.strip())
-
+WORDS = [ w for w in WORDS if w != '' ]
 
 def convert(snippet, phrase):
 	class_names = [w.capitalize() for w in random.sample(WORDS, snippet.count("###"))]
@@ -44,19 +44,19 @@ def convert(snippet, phrase):
 	for sentence in snippet, phrase:
 		result = sentence[:]
 	
-	# fake class names
-	for word in class_names:
-		result = result.replace("###", word, 1)
+		# fake class names
+		for word in class_names:
+			result = result.replace("###", word, 1)
+	
+		#fake other names
+		for word in other_names:
+			result = result.replace("***", word, 1)
+	
+		# fake parameter lists
+		for word in param_names:
+			result = result.replace("@@@", word, 1)
 
-	#fake other names
-	for word in other_names:
-		result = result.replace("###", word, 1)
-
-	# fake parameter lists
-	for word in param_names:
-		result = result.replace("@@@", word, 1)
-
-	results.append(result)
+		results.append(result)
 	return results
 
 
